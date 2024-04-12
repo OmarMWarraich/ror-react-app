@@ -1,14 +1,19 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import PostsList from "./features/PostsList";
+import NavBar from "./components/NavBar";
+import AppRoutes from "./components/AppRoutes";
 
 function App() {
   return (
     <>
-      <div className="app">
-        <h1>React on Rails Blog</h1>
-        <p>Find this application layout in client/src/App.jsx</p>
-        <PostsList />
-      </div>
+      <Router>
+        <div className="app">
+          <h1>React on Rails Blog</h1>
+          <p>Find this application layout in client/src/App.jsx</p>
+          <NavBar />
+          <AppRoutes />
+        </div>
+      </Router>
     </>
   );
 }
