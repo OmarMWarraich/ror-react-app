@@ -29,6 +29,8 @@ const PostDetails = () => {
       <h2>{post.title}</h2>
       <p>{post.body}</p>
       <Link to="/">Back to Posts</Link>
+      {" | "}
+      <Link to={`/posts/${id}/edit`}>Edit</Link>
     </div>
   );
 };

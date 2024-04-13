@@ -1,0 +1,96 @@
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+
+import { API_URL } from "../../constants";
+
+const PostEditForm = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const response = await fetch(`${API_URL}/${id}`);
+        if (response.ok) {
+          const data = await response.json();
+          setPost(data);
+        } else {
+          throw new Error("Failed to fetch post");
+        }
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPost();
+  }, [id]);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const data = new FormData(form);
+    const newPost = {
+      title: data.get("title"),
+      body: data.get("body"),
+    };
+    try {
+      const response = await fetch(`${API_URL}/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newPost),
+      });
+      if (response.ok) {
+        navigate(`/posts/${id}`);
+      } else {
+        throw new Error("Failed to update post");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return (
+    <div>
+      <h2>Edit Post</h2>
+      {loading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p>Error: {error.message}</p>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="title">Title</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              value={post.title}
+              onChange={(e) => setPost({ ...post, title: e.target.value })}
+            />
+          </div>
+          <div>
+            <label htmlFor="body">Body</label>
+            <textarea
+              id="body"
+              name="body"
+              value={post.body}
+              onChange={(e) => setPost({ ...post, body: e.target.value })}
+            />
+          </div>
+          <button type="submit">Save</button>
+          <button type="button" onClick={() => navigate(`/posts/${id}`)}>
+            Cancel
+          </button>
+        </form>
+      )}
+    </div>
+  );
+};
+
+export default PostEditForm;
