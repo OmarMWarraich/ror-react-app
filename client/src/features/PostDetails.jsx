@@ -24,6 +24,21 @@ const PostDetails = () => {
     fetchPost();
   }, [id]);
 
+  const deletePost = async () => {
+    try {
+      const response = await fetch(`${API_URL}/${id}`, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        navigate("/");
+      } else {
+        throw new Error("Failed to delete post");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div>
       <h2>{post.title}</h2>
@@ -31,6 +46,8 @@ const PostDetails = () => {
       <Link to="/">Back to Posts</Link>
       {" | "}
       <Link to={`/posts/${id}/edit`}>Edit</Link>
+      {" | "}
+      <button onClick={deletePost}>Delete</button>
     </div>
   );
 };
