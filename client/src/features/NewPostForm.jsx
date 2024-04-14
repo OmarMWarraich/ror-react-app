@@ -15,7 +15,7 @@ const NewPostForm = () => {
       await createPost(post);
       navigate("/");
     } catch (error) {
-      console.error(error);
+      console.error("Failed to create post: ", error);
     }
   };
   return (
