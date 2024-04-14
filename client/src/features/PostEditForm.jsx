@@ -15,9 +15,10 @@ const PostEditForm = () => {
       try {
         const response = await fetchPost(id);
         setPost(response);
+        setLoading(false);
       } catch (error) {
+        console.error("Failed to fetch the post: ", error);
         setError(error);
-      } finally {
         setLoading(false);
       }
     };
@@ -36,7 +37,7 @@ const PostEditForm = () => {
       await updatePost(id, newPost);
       navigate(`/posts/${id}`);
     } catch (error) {
-      console.error(error);
+      console.error("Failed to update the post: ", error);
     }
   };
 
