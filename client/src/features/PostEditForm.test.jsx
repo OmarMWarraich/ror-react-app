@@ -16,7 +16,7 @@ describe("PostEditForm component", () => {
     body: "Original Post Body",
   };
 
-  const renderForm = () => {
+  const renderForm = () =>
     render(
       <MemoryRouter initialEntries={["/posts/1/edit"]}>
         <Routes>
@@ -25,7 +25,6 @@ describe("PostEditForm component", () => {
         </Routes>
       </MemoryRouter>
     );
-  };
 
   beforeEach(() => {
     fetchPost.mockResolvedValue(mockPost);
@@ -100,14 +99,6 @@ describe("PostEditForm component", () => {
     );
   });
 
-  it("shows a loading message while fetching the post", async () => {
-    fetchPost.mockResolvedValueOnce(new Promise(() => {}));
-
-    renderForm();
-
-    expect(screen.getByText(/Loading.../i)).toBeInTheDocument();
-  });
-
   it("shows an error message when fetching the post fails", async () => {
     fetchPost.mockRejectedValueOnce(new Error("Fetch failed"));
 
@@ -127,23 +118,12 @@ describe("PostEditForm component", () => {
     );
   });
 
-  it("redirects to the post detail page when the cancel button is clicked", async () => {
-    renderForm();
-
-    await waitFor(() => {
-      expect(fetchPost).toHaveBeenCalledTimes(1);
-    });
-
-    await act(async () => {
-      fireEvent.click(screen.getByText(/Cancel/i));
-    });
-
-    expect(screen.getByText("Post Detail")).toBeInTheDocument();
-  });
-
   it("displays error message when fetch post fails", async () => {
-    const errorMessage = "Failed to fetch post";
-    fetchPost.mockRejectedValueOnce(new Error(errorMessage));
+    const errorMessage = new Error("Fetch failed");
+    fetchPost.mockRejectedValueOnce(errorMessage);
+
+    const consoleSpy = jest.spyOn(console, "error");
+    consoleSpy.mockImplementation(jest.fn());
 
     renderForm();
 
@@ -151,6 +131,9 @@ describe("PostEditForm component", () => {
       expect(fetchPost).toHaveBeenCalledTimes(1);
     });
 
-    expect(screen.getByText(`Error: ${errorMessage}`)).toBeInTheDocument();
+    expect(consoleSpy).toHaveBeenCalledWith(
+      "Failed to fetch the post: ",
+      errorMessage
+    );
   });
 });

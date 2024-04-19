@@ -41,8 +41,8 @@ describe("NewPostForm", () => {
     fireEvent.change(titleInput, { target: { value: expectedTitle } });
     fireEvent.change(bodyInput, { target: { value: expectedBody } });
 
-    expect(titleInput).toHaveValue(expectedTitle);
-    expect(bodyInput).toHaveValue(expectedBody);
+    expect(titleInput.value).toBe(expectedTitle);
+    expect(bodyInput.value).toBe(expectedBody);
     expect(submitButton).toBeInTheDocument();
   });
 
