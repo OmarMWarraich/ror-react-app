@@ -1,10 +1,9 @@
 import { API_URL } from "../../constants";
 
-export const createPost = async (post) => {
+export const createPost = async (postData) => {
   const response = await fetch(API_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(post),
+    body: postData,
   });
   if (!response.ok) {
     throw new Error("Failed to create post");

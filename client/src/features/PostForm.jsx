@@ -6,6 +6,7 @@ const PostForm = ({ post, headerText, onSubmit, buttonText }) => {
     post || {
       title: "",
       body: "",
+      image: "",
     }
   );
 
@@ -30,6 +31,21 @@ const PostForm = ({ post, headerText, onSubmit, buttonText }) => {
                 title: e.target.value,
               })
             }
+          />
+        </div>
+        <div>
+          <label htmlFor="image">Image</label>
+          <input
+            type="file"
+            id="image"
+            accept="image/*"
+            onChange={(e) => {
+              setFormData({
+                ...formData,
+                image: e.target.files[0],
+              });
+              console.log(e.target.files[0]);
+            }}
           />
         </div>
         <div>

@@ -91,6 +91,7 @@ describe("PostForm component", () => {
     expect(mockSubmit).toHaveBeenCalledWith({
       title: newTitle,
       body: newBody,
+      image: "",
     });
   });
 });
