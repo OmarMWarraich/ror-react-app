@@ -31,6 +31,7 @@ const PostDetails = () => {
   return (
     <div>
       <h2>{post.title}</h2>
+      <img src={post.image_url} alt={post.title} className="post-image" />
       <p>{post.body}</p>
       <Link to="/">Back to Posts</Link>
       {" | "}
