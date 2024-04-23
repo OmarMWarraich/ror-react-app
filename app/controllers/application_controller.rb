@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::API
-
   private
 
   def augment_with_image(post)
