@@ -24,8 +24,8 @@ export const deletePost = async (id) => {
   throw new Error(response.statusText);
 };
 
-export const fetchAllPosts = async () => {
-  const response = await fetch(POSTS_API_URL);
+export const fetchAllPosts = async (page = 1) => {
+  const response = await fetch(`${POSTS_API_URL}?page=${page}`);
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
@@ -51,9 +51,11 @@ export const updatePost = async (id, postData) => {
   return response.json();
 };
 
-export const searchPosts = async (searchTerm) => {
+export const searchPosts = async (searchTerm, page = 1) => {
   // => api/v1/search + /posts/?q=...
-  const response = await fetch(`${SEARCH_API_URL}/posts/?q=${searchTerm}`);
+  const response = await fetch(
+    `${SEARCH_API_URL}/posts/?q=${searchTerm}&page=${page}`
+  );
   if (!response.ok) {
     throw new Error(response.statusText);
   }
