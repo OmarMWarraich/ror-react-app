@@ -40,11 +40,10 @@ export const fetchPost = async (id) => {
   return await response.json();
 };
 
-export const updatePost = async (id, post) => {
+export const updatePost = async (id, postData) => {
   const response = await fetch(`${API_URL}/${id}`, {
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(post),
+    body: postData,
   });
   if (!response.ok) {
     throw new Error(response.statusText);
