@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   # API routes should be versioned to avoid breaking changes.
   namespace :api do
     namespace :v1 do
+      get 'search/posts'
       resources :posts
     end
   end

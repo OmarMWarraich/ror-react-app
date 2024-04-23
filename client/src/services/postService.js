@@ -1,7 +1,7 @@
-import { API_URL } from "../../constants";
+import { POSTS_API_URL, SEARCH_API_URL } from "../../constants";
 
 export const createPost = async (postData) => {
-  const response = await fetch(API_URL, {
+  const response = await fetch(POSTS_API_URL, {
     method: "POST",
     body: postData,
   });
@@ -13,7 +13,7 @@ export const createPost = async (postData) => {
 };
 
 export const deletePost = async (id) => {
-  const response = await fetch(`${API_URL}/${id}`, {
+  const response = await fetch(`${POSTS_API_URL}/${id}`, {
     method: "DELETE",
   });
 
@@ -25,15 +25,15 @@ export const deletePost = async (id) => {
 };
 
 export const fetchAllPosts = async () => {
-  const response = await fetch(API_URL);
+  const response = await fetch(POSTS_API_URL);
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
-  return await response.json();
+  return response.json();
 };
 
 export const fetchPost = async (id) => {
-  const response = await fetch(`${API_URL}/${id}`);
+  const response = await fetch(`${POSTS_API_URL}/${id}`);
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
@@ -41,7 +41,7 @@ export const fetchPost = async (id) => {
 };
 
 export const updatePost = async (id, postData) => {
-  const response = await fetch(`${API_URL}/${id}`, {
+  const response = await fetch(`${POSTS_API_URL}/${id}`, {
     method: "PUT",
     body: postData,
   });
@@ -49,4 +49,13 @@ export const updatePost = async (id, postData) => {
     throw new Error(response.statusText);
   }
   return response.json();
+};
+
+export const searchPosts = async (searchTerm) => {
+  // => api/v1/search + /posts/?q=...
+  const response = await fetch(`${SEARCH_API_URL}/posts/?q=${searchTerm}`);
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+  return await response.json();
 };
