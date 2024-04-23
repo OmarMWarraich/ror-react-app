@@ -81,3 +81,34 @@ describe("PostsList component", () => {
     });
   });
 });
+
+describe("PostsList component image_url rendering", () => {
+  const mockPostWithImageUrl = [
+    { id: 1, title: "Post 1", body: "Body1", image_url: "http://image-url/" },
+  ];
+
+  const mockPostWithoutImageUrl = [
+    { id: 1, title: "Post 1", body: "Body1", image_url: null },
+  ];
+
+  test("renders the image with image_url", async () => {
+    postsService.fetchAllPosts.mockResolvedValue(mockPostWithImageUrl);
+    render(<PostsList />, { wrapper: MemoryRouter });
+
+    await waitFor(() => screen.getByText(mockPostWithImageUrl[0].title));
+
+    const imgElement = screen.getByAltText(mockPostWithImageUrl[0].title);
+    expect(imgElement).toBeInTheDocument();
+    expect(imgElement.src).toBe(mockPostWithImageUrl[0].image_url);
+  });
+
+  test("renders the placeholder div when image_url is null", async () => {
+    postsService.fetchAllPosts.mockResolvedValue(mockPostWithoutImageUrl);
+    render(<PostsList />, { wrapper: MemoryRouter });
+
+    await waitFor(() => screen.getByText(mockPostWithoutImageUrl[0].title));
+
+    const placeholderDiv = screen.getByTestId("post-image-stub");
+    expect(placeholderDiv).toBeInTheDocument();
+  });
+});

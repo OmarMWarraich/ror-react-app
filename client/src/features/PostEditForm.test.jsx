@@ -4,6 +4,7 @@ import { act } from "react-dom/test-utils";
 
 import { fetchPost, updatePost } from "../services/postService";
 import PostEditForm from "./PostEditForm";
+import { objectToFormData } from "../utils/formDataHelper";
 
 jest.mock("../services/postService", () => ({
   fetchPost: jest.fn(),
@@ -55,7 +56,10 @@ describe("PostEditForm component", () => {
     const newPost = {
       title: "Updated Post Title",
       body: "Updated Post Body",
+      image: null,
     };
+
+    const formData = objectToFormData({ post: newPost });
 
     fireEvent.change(screen.getByLabelText(/title/i), {
       target: { value: newPost.title },
@@ -71,7 +75,7 @@ describe("PostEditForm component", () => {
 
     await waitFor(() => {
       expect(updatePost).toHaveBeenCalledTimes(1);
-      expect(updatePost).toHaveBeenCalledWith("1", newPost);
+      expect(updatePost).toHaveBeenCalledWith("1", formData);
     });
 
     expect(screen.getByText("Post Detail")).toBeInTheDocument();
