@@ -28,7 +28,7 @@
 
 ## Project Description
 
-This project is a blog application that allows users to create, edit, and delete posts amd upload images. The application is built using Ruby on Rails and React. The frontend is built using React and the backend is built using Ruby on Rails. The application also uses PostgreSQL as the database.
+This project is a blog application that allows users to create, edit, and delete posts and upload images. The application is built using Ruby on Rails and React. The frontend is built using React and the backend is built using Ruby on Rails. The application also uses PostgreSQL as the database.
 
 ## 🛠 Built With <a name="built-with"></a>
 

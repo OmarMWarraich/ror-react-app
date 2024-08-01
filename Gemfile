@@ -49,3 +49,7 @@ end
 gem "rails-controller-testing", "~> 1.0"
 
 gem "kaminari", "~> 1.2"
+
+gem "devise", "~> 4.9"
+gem 'devise-jwt'
+gem 'jsonapi-serializer'
