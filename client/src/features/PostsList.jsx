@@ -34,7 +34,6 @@ function PostsList() {
       setPosts(fetchedPosts); // Update the posts state once fetchedPosts is available
     }
   }, [fetchedPosts]);
-  console.log("Test");
 
   useEffect(() => {
     const initialSearchTerm = searchParams.get("search") || "";

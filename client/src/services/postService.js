@@ -4,6 +4,9 @@ export const createPost = async (postData) => {
   const response = await fetch(POSTS_API_URL, {
     method: "POST",
     body: postData,
+    headers: {
+      Authorization: localStorage.getItem("token"),
+    },
   });
   if (!response.ok) {
     throw new Error("Failed to create post");
@@ -15,6 +18,9 @@ export const createPost = async (postData) => {
 export const deletePost = async (id) => {
   const response = await fetch(`${POSTS_API_URL}/${id}`, {
     method: "DELETE",
+    headers: {
+      Authorization: localStorage.getItem("token"),
+    },
   });
 
   if (response.status === 204) {
@@ -25,7 +31,11 @@ export const deletePost = async (id) => {
 };
 
 export const fetchAllPosts = async (page = 1) => {
-  const response = await fetch(`${POSTS_API_URL}?page=${page}`);
+  const response = await fetch(`${POSTS_API_URL}?page=${page}`, {
+    headers: {
+      Authorization: localStorage.getItem("token"),
+    },
+  });
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
@@ -33,7 +43,11 @@ export const fetchAllPosts = async (page = 1) => {
 };
 
 export const fetchPost = async (id) => {
-  const response = await fetch(`${POSTS_API_URL}/${id}`);
+  const response = await fetch(`${POSTS_API_URL}/${id}`, {
+    headers: {
+      Authorization: localStorage.getItem("token"),
+    },
+  });
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
@@ -44,6 +58,9 @@ export const updatePost = async (id, postData) => {
   const response = await fetch(`${POSTS_API_URL}/${id}`, {
     method: "PUT",
     body: postData,
+    headers: {
+      Authorization: localStorage.getItem("token"),
+    },
   });
   if (!response.ok) {
     throw new Error(response.statusText);
@@ -54,7 +71,12 @@ export const updatePost = async (id, postData) => {
 export const searchPosts = async (searchTerm, page = 1) => {
   // => api/v1/search + /posts/?q=...
   const response = await fetch(
-    `${SEARCH_API_URL}/posts/?q=${searchTerm}&page=${page}`
+    `${SEARCH_API_URL}/posts/?q=${searchTerm}&page=${page}`,
+    {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    }
   );
   if (!response.ok) {
     throw new Error(response.statusText);
