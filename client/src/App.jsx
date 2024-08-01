@@ -18,10 +18,14 @@ function App() {
       <Router>
         <div className="app">
           <h1>React on Rails Blog</h1>
-          <p>Find this application layout in client/src/App.jsx</p>
           <User currUser={currUser} setCurrUser={setCurrUser} />
-          <NavBar />
-          <AppRoutes />
+          {/* if there is a user add the navbar and approutes components */}
+          {currUser && (
+            <>
+              <NavBar />
+              <AppRoutes />
+            </>
+          )}
         </div>
       </Router>
     </>

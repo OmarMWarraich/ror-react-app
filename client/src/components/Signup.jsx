@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import "./Signup.css";
 
 const Signup = ({ setCurrUser, setShow }) => {
   const formRef = useRef();
@@ -37,12 +38,17 @@ const Signup = ({ setCurrUser, setShow }) => {
     setShow(true);
   };
   return (
-    <div>
-      <form ref={formRef} onSubmit={handleSubmit}>
-        Email: <input type="email" name="email" placeholder="email" />
+    <div className="signup-container">
+      <form ref={formRef} onSubmit={handleSubmit} className="signup-form">
+        Email:{" "}
+        <input type="email" name="email" placeholder="Enter your email" />
         <br />
         Password:{" "}
-        <input type="password" name="password" placeholder="password" />
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter your password"
+        />
         <br />
         <input type="submit" value="Submit" />
       </form>

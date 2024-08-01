@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import "./Login.css";
 
 const Login = ({ setCurrUser, setShow }) => {
   const formRef = useRef();
@@ -19,6 +20,7 @@ const Login = ({ setCurrUser, setShow }) => {
 
       localStorage.setItem("token", response.headers.get("Authorization"));
       localStorage.setItem("user", JSON.stringify(data.data));
+      window.location.reload();
     } catch (error) {
       console.log("error", error);
     }
@@ -41,12 +43,17 @@ const Login = ({ setCurrUser, setShow }) => {
     setShow(false);
   };
   return (
-    <div>
-      <form ref={formRef} onSubmit={handleSubmit}>
-        Email: <input type="email" name="email" placeholder="email" />
+    <div className="login-container">
+      <form ref={formRef} onSubmit={handleSubmit} className="login-form">
+        Email:{" "}
+        <input type="email" name="email" placeholder="Enter your email" />
         <br />
         Password:{" "}
-        <input type="password" name="password" placeholder="password" />
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter your password"
+        />
         <br />
         <input type="submit" value="Login" />
       </form>
