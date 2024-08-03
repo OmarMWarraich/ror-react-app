@@ -53,3 +53,4 @@ gem "kaminari", "~> 1.2"
 gem "devise", "~> 4.9"
 gem 'devise-jwt'
 gem 'jsonapi-serializer'
+gem "pg", "~> 1.2"
