@@ -28,7 +28,9 @@
 
 ## Project Description
 
-This project is a blog application that allows users to create, edit, and delete posts and upload images. The application is built using Ruby on Rails and React. The frontend is built using React and the backend is built using Ruby on Rails. The application also uses PostgreSQL as the database.
+The frontend is built using React and the backend is built using Ruby on Rails while PostgreSQL is used as the database. The application allows users to create an account and log in. Users can create, edit, and delete posts. Users can also upload images to their posts. The application also has a search functionality that allows users to search for posts by title. The application also has pagination that allows users to navigate through the posts. The backend is hosted on an EC2 instance using docker-compose while the frontend is hosted through AWS-Amplify while using Route 53 for DNS.
+
+[Frontend](https://github.com/omarMWarraich/ror-react-app-frontend)
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -63,6 +65,7 @@ This project is a blog application that allows users to create, edit, and delete
 - **Pagination**
 - **Search Functionality**
 - **Responsive Design**
+- **User Authentication**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -70,7 +73,7 @@ This project is a blog application that allows users to create, edit, and delete
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- Coming Soon.
+[Live Demo](https://ror-react-blog.topgeardirect.com/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -139,9 +142,9 @@ rspec spec
 
 ## 🔭 Future Features
 
-- Add User Authentication
 - Add User Authorization
 - Add User Roles
+- Add Notifications
 
 ## 🤝 Contributing
 
@@ -165,4 +168,4 @@ I would like to thank Deanin for his guidance and support throughout the project
 
 ## 📝 License
 
-This project is [MIT](LICENSE) licensed.
+This project is [MIT](./LICENSE.md) licensed.
